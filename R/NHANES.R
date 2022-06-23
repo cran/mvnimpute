@@ -1,0 +1,25 @@
+#' Combined NHANES dataset from 1999-2004 NHANES study
+#'
+#' A dataset including the age, gender and diastolic blood pressure, body mass index and 24 PCB
+#' measurements.
+#'
+#' @format A list including data frame with 5874 rows and 24 variables and associated indicator matrix:
+#' \describe{
+#'   \item{BPXDAR}{Diastolic blood pressure}
+#'   \item{RIAGENDR}{Gender, 1 = male, 2 = female}
+#'   \item{RIDAGEYR}{Age in years}
+#'   \item{BMXBMI}{Body mass index}
+#' }
+#'
+#' @details The dataset is combined from the NHANES release cycles 1999-2000, 2001-2002, and 2003-2004. Almost
+#' all PCB have both the missing and censored values as falling below the limits of detection (LODs). The dataset include
+#' two components, the first component is the observed NHANES data where the censored PCB measurements are replaced
+#' by the LODs dividing the square root of 2. The second component is a data frame including the censoring indicators
+#' of the data, in that data frame, 0 indicates an observed PCB measurement, 1 indicates a censored PCB measurement, and `NA` indicates
+#' a missing PCB measurement.
+#'
+#' @note The subset provided here was selected to demonstrate the functionality of the mvnimpute package,
+#' no clinical conclusions should be derived from it.
+#'
+#' @source \url{https://www.cdc.gov/nchs/nhanes/index.htm}
+"NHANES.dat"
