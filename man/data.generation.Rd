@@ -2,7 +2,7 @@
 % Please edit documentation in R/data.generation.new.R
 \name{data.generation}
 \alias{data.generation}
-\title{New data generation function}
+\title{Data generation function}
 \usage{
 data.generation(
   num_ind = 2000,

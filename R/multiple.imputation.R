@@ -20,7 +20,7 @@
 #' of multiple imputation.
 #'
 #' @examples
-#'
+#' \dontrun{
 #' ### data and indicator
 #' miss.dat <- simulated.dat[[1]]
 #' data.ind <- simulated.dat[[2]]
@@ -58,18 +58,15 @@
 #'   sigma = diag(100, p)
 #' )
 #'
-#'
-#' ### MI
-#' num.iter <- 500
-#'
-#' begin <- Sys.time()
+#' ### imputation
 #' sim.res <- multiple.imputation(
-#'   bounds,
-#'   prior.param,
-#'   start.vals,
-#'   num.iter,
-#'   FALSE
+#'    data = bounds,
+#'    prior.params = prior.param,
+#'    initial.values = start.vals,
+#'    iter = 500,
+#'    verbose = FALSE
 #' )
+#' }
 #'
 #' @references
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/visual.plot.R
 \name{visual.plot}
 \alias{visual.plot}
-\title{Function for missing and censored data visualization}
+\title{Draws percentage plot for different type of values}
 \usage{
 visual.plot(data.indicator, title = "Percentages of different data type")
 }

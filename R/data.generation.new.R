@@ -1,9 +1,4 @@
-########################################
-### new data generation function 7-1 ###
-########################################
-
-
-#' New data generation function
+#' Data generation function
 #'
 #' Simulates multivariate normal data with missing and censored values. In this function, missing values will be
 #' generated first in the multivariate data, then censored values will be generated for the non-missing data.

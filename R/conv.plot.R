@@ -2,14 +2,25 @@
 NULL
 #' Convergence plot function
 #'
-#' Draws the convergence plots for the simulated parameter values of all variables.
+#' Draws convergence plot for the simulated parameter values of all variables.
 #'
 #' @param data.mat data matrix including the simulated values.
 #' @param start the number of cycle to start.
 #' @param end the number of cycle to end.
 #' @param x.lab label of the x axis in the generated plot, default is set to "Iteration number".
 #' @param y.lab label of the y axis in the generated plot, default is set to "Simulated values".
-#' @param title title of the generated plot.
+#' @param title title of each generated plot.
+#'
+#' @examples
+#'
+#' ### generate some data
+#' dat <- MASS::mvrnorm(n = 1000, mu = c(1, 2, 3, 4), Sigma = diag(4))
+#'
+#' ### set column names
+#' colnames(dat) <- paste0("Var ", 1:ncol(dat))
+#'
+#' ### convergence plot: select samples from 500 to 1000 rows
+#' conv.plot(data.mat = dat[500:1000, ], start = 500, end = 1000, title = "Random Variables")
 #'
 #' @details The function generates the trace plot of simulated values across iterations.
 #' \code{iter} can be any number of iterations you want to draw, the corresponding number of rows
@@ -31,6 +42,8 @@ conv.plot <- function(data.mat, ### matrix that includes values for plot
   if ((start < 0) | (end < 0)) {
     stop("Please enter two logical values!")
   }
+  # check column names
+  if (is.null(colnames(data.mat))){stop("Variable names have to be specified")}
 
   # transform data from wide to long
 

@@ -1,13 +1,13 @@
 #' Averaged simulated values plot function
 #'
-#' Calculates and the average simulated values of all parameters and generates plots.
+#' Calculates the average simulated values of all parameters and generates plots.
 #'
 #' @param data.mat data matrix including the simulated values for plot.
 #' @param start the number of cycle to start.
 #' @param end the number of cycle to end.
 #' @param x.lab label of the x axis in the generated plot, default is set to "Iteration number".
 #' @param y.lab label of the y axis in the generated plot, default is set to "Average of simulated values".
-#' @param title title of the generated plot.
+#' @param title title of each generated plot.
 #' @param details logical variable to specify whether the average simulated values are returned, default is set to FALSE.
 #'
 #' @details This function calculates the average simulated values across simulations.
@@ -15,60 +15,15 @@
 #' of the data should be \code{iter} + 1.
 #'
 #' @examples
-#' ### data and indicator
-#' miss.dat <- simulated.dat[[1]]
-#' data.ind <- simulated.dat[[2]]
 #'
-#' ### number of observations and variables
-#' n <- nrow(miss.dat); p <- ncol(miss.dat)
+#' ### generate some normal data
+#' dat <- MASS::mvrnorm(n = 1000, mu = c(1, 2, 3, 4), Sigma = diag(4))
 #'
-#' #### bound matrices
-#' b1 <- b2 <- matrix(nrow = nrow(data.ind), ncol = ncol(data.ind))
+#' ### set column names
+#' colnames(dat) <- paste0("Var ", 1:ncol(dat))
 #'
-#' for (i in 1:nrow(b1)) {
-#'   for (j in 1:ncol(b1)) {
-#'     b1[i, j] <- ifelse(data.ind[i, j] != 1, NA,
-#'                        miss.dat[i, j])
-#'     b2[i, j] <- ifelse(data.ind[i, j] == 0, NA, miss.dat[i, j])
-#'   }
-#' }
-#' colnames(b1) <- colnames(b2) <- colnames(miss.dat)
-#'
-#' #### create a matrix for including the lower and upper bounds
-#' bounds <- list()
-#' bounds[[1]] <- b1; bounds[[2]] <- b2
-#'
-#' ### prior specifications
-#' prior.param <- list(
-#'   mu.0 = rep(0, p),
-#'   Lambda.0 = diag(100, p),
-#'   kappa.0 = 2,
-#'   nu.0 = p * (p + 1) / 2
-#' )
-#'
-#' ### starting values
-#' start.vals <- list(
-#'   mu = rep(0, p),
-#'   sigma = diag(100, p)
-#' )
-#'
-#'
-#' ### MI
-#' num.iter <- 500
-#'
-#' begin <- Sys.time()
-#' sim.res <- multiple.imputation(
-#'   bounds,
-#'   prior.param,
-#'   start.vals,
-#'   num.iter,
-#'   FALSE
-#' )
-#'
-#' ### plot of average values of simulated mean and variance
-#' avg.plot(sim.res$simulated.mu, 201, 501, title = "Simulated value: mean")
-#' avg.plot(sim.res$simulated.sig, 201, 501, title = "Simulated value: variance")
-#'
+#' ### average values plot: take sample from 500 to 1000 rows
+#' avg.plot(data.mat = dat[500:1000, ], start = 500, end = 1000, title = "Random Variables")
 #'
 #' @return The plot of averaged values across iterations. If \code{details} = TRUE,
 #' a matrix containing the averaged values of all the variables across iterations will be returned.
@@ -82,6 +37,8 @@ avg.plot <- function(data.mat,  ### matrix that includes values for plot
                      title = NULL,
                      details = FALSE) {  ### print the averages of simulated values in the console
 
+  # check column names
+  if (is.null(colnames(data.mat))){stop("Variable names have to be specified")}
   # compute the cumulative averages of the parameter values to the current simulation
   iter <- end - start
   avg.param <- matrix(nrow = iter  + 1, ncol = ncol(data.mat))

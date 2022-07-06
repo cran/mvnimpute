@@ -30,25 +30,20 @@ package can be installed from [GitHub](https://github.com) with:
 # install the development package devtools for installing packages from GitHub
 install.packages("devtools")
 
-# install mvnimpute package with vignette from GitHub
-devtools::install_github("hli226/mvnimpute", build_vignettes = TRUE)
+# install mvnimpute package from GitHub
+devtools::install_github("hli226/mvnimpute")
 ```
 
-`build_vignettes = TRUE` argument is added for including the vignettes,
-which give the step-by-step instructions on how to use this package
-using an artificial example. You have to install the development package
-**devtools** for installing packages from GitHub. The packages that
-**mvnimpute** depends on will be automatically downloaded and installed.
+You have to install the development package **devtools** for installing
+packages from GitHub. The packages that **mvnimpute** depends on will be
+automatically downloaded and installed.
 
 ## Basic functions
 
-It has 8 functions including
+It has 9 functions including
 
 `data.generation`: generates multivariate normal data with missing and
 censored values.
-
-`param_calc`: calculates the complete-case and available-case
-parameters.
 
 `visual.plot`: draws plot showing percentages of missing, censored, and
 observed values.
@@ -57,8 +52,6 @@ observed values.
 
 `multiple.imputation`: multiply imputes data with missing and censored
 values.
-
-`single_imputation`: singly imputes missing data.
 
 `conv.plot`: draws convergence plot of the parameters from the multiple
 imputation.
@@ -72,11 +65,8 @@ parameters from the multiple imputation.
 variables including diastolic blood pressure, gender, age and body mass
 index.
 
-For detailed instructions on using the package and a walk-through
-example, please refer to the vignette downloaded with the package. Once
-the package is installed, the vignette can be accessed using the
-function `browseVignettes("mvnimpute")`, it will open in an external web
-browser.
+`simulated.dat`: A simulated dataset of sample size 200 with missing and
+left censored values.
 
 ## Acknowlegements
 

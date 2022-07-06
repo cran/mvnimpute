@@ -5,7 +5,7 @@
 #' @param data.mat matrix including the variables of which autocorrelations are calculated.
 #' @param lag lag at which the autocorrelation is calculated, default is set as 50.
 #' @param plot  logical variable to specify whether the plot is generated, default is set to TRUE.
-#' @param title title of the generated autocorrelation plots.
+#' @param title title of each generated autocorrelation plot.
 #' @param details boolean variable to specify whether the autocorrelation values are returned, default is set to FALSE.
 #'
 #' @details This function calculates the autocorrelations of all the variables on a column by column base.
@@ -13,59 +13,12 @@
 #' which reflects the corresponding number of iteration of running the multiple imputation.
 #'
 #' @examples
-#' ### data and indicator
-#' miss.dat <- simulated.dat[[1]]
-#' data.ind <- simulated.dat[[2]]
 #'
-#' ### number of observations and variables
-#' n <- nrow(miss.dat); p <- ncol(miss.dat)
+#' ### generate some data
+#' dat <- MASS::mvrnorm(n = 1000, mu = c(1, 2, 3, 4), Sigma = diag(4))
 #'
-#' #### bound matrices
-#' b1 <- b2 <- matrix(nrow = nrow(data.ind), ncol = ncol(data.ind))
-#'
-#' for (i in 1:nrow(b1)) {
-#'   for (j in 1:ncol(b1)) {
-#'     b1[i, j] <- ifelse(data.ind[i, j] != 1, NA,
-#'                        miss.dat[i, j])
-#'     b2[i, j] <- ifelse(data.ind[i, j] == 0, NA, miss.dat[i, j])
-#'   }
-#' }
-#' colnames(b1) <- colnames(b2) <- colnames(miss.dat)
-#'
-#' #### create a matrix for including the lower and upper bounds
-#' bounds <- list()
-#' bounds[[1]] <- b1; bounds[[2]] <- b2
-#'
-#' ### prior specifications
-#' prior.param <- list(
-#'   mu.0 = rep(0, p),
-#'   Lambda.0 = diag(100, p),
-#'   kappa.0 = 2,
-#'   nu.0 = p * (p + 1) / 2
-#' )
-#'
-#' ### starting values
-#' start.vals <- list(
-#'   mu = rep(0, p),
-#'   sigma = diag(100, p)
-#' )
-#'
-#'
-#' ### MI
-#' num.iter <- 500
-#'
-#' begin <- Sys.time()
-#' sim.res <- multiple.imputation(
-#'   bounds,
-#'   prior.param,
-#'   start.vals,
-#'   num.iter,
-#'   FALSE
-#' )
-#'
-#' ### ACF of simulated mean and variance
-#' acf.calc(sim.res$simulated.mu, title = "ACF: mean")
-#' acf.calc(sim.res$simulated.sig, title = "ACF: variance")
+#' ### ACF plots
+#' acf.calc(data.mat = dat, title = paste0("Var ", 1:nrow(dat)))
 #'
 #' @return If \code{details} = TRUE, a matrix containing the calculated autocorrelations of all the variables in the dataset will be returned.
 #' If \code{plot} = TRUE, the autocorrelation plots of all the variables will be drawn.

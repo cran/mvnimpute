@@ -24,16 +24,28 @@ conv.plot(
 
 \item{y.lab}{label of the y axis in the generated plot, default is set to "Simulated values".}
 
-\item{title}{title of the generated plot.}
+\item{title}{title of each generated plot.}
 }
 \value{
 The plot of simulated values across iterations.
 }
 \description{
-Draws the convergence plots for the simulated parameter values of all variables.
+Draws convergence plot for the simulated parameter values of all variables.
 }
 \details{
 The function generates the trace plot of simulated values across iterations.
 \code{iter} can be any number of iterations you want to draw, the corresponding number of rows
 of the data is \code{iter} + 1.
+}
+\examples{
+
+### generate some data
+dat <- MASS::mvrnorm(n = 1000, mu = c(1, 2, 3, 4), Sigma = diag(4))
+
+### set column names
+colnames(dat) <- paste0("Var ", 1:ncol(dat))
+
+### convergence plot: select samples from 500 to 1000 rows
+conv.plot(data.mat = dat[500:1000, ], start = 500, end = 1000, title = "Random Variables")
+
 }

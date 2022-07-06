@@ -1,6 +1,6 @@
 #' @import ggplot2
 NULL
-#' Function for missing and censored data visualization
+#' Draws percentage plot for different type of values
 #'
 #' Draws plot that graphically shows the percentages of the missing, censored and observed data. It supports
 #' generating plots for all major types of censoring including left, right and interval censoring.
